@@ -21,14 +21,12 @@ export default class SearchResults extends Component {
     }
   }
 
-  fetchNewData(props) {
-    (async() => {
-      let data = await fetchJSON(props.uri)
-      console.log(data)
-      this.setState({
-        items: data.items
-      })
-    })()
+  fetchNewData = async function(props) {
+    let data = await fetchJSON(props.uri)
+    console.log(data)
+    this.setState({
+      items: data.items
+    })
   }
 
   componentWillMount() {

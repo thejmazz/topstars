@@ -6,6 +6,20 @@ of all time!
 
 Demo: [thejmazz.github.io/topstars](http://thejmazz.github.io/topstars/)
 
+## Dev Server
+
+```bash
+$ webpack-dev-server
+```
+
+## Build
+
+```bash
+$ webpack
+$ # yeah, I know..
+$ cp public/index.html build
+```
+
 ## Tech
 
 - [react](https://facebook.github.io/react)
@@ -37,16 +51,29 @@ class Car extends Vehicle {
 }
 ```
 
-## Dev Server
+Async/Await + Fetch, in `util.js`:
 
-```bash
-$ webpack-dev-server
+```js
+export async function fetchJSON(uri)  {
+  try {
+    let res = await fetch(uri)
+    let data = await res.json()
+    return data
+  } catch (e) {
+    console.error(e)
+  }
+}
 ```
 
-## Build
+and consumed in `SearchResults.js` (also using stage-1 class properties):
 
-```bash
-$ webpack
-$ # yeah, I know..
-$ cp public/index.html build
+```js
+// ...
+fetchNewData = async function(props) {
+  let data = await fetchJSON(props.uri)
+  console.log(data)
+  this.setState({
+    items: data.items
+  })
+}
 ```
